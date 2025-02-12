@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\ActivationCode;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -31,16 +32,29 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'activation_code' => 'required|string|max:255',
             'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        $activation_code = ActivationCode::where('code', $request->activation_code)->first();
+
+        if (!$activation_code) {
+            return back()->withErrors(['activation_code' => 'Invalid activation code provided.'])->withInput();
+        }
+
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'first_name' => $request->first_name,
+            'last_name'  => $request->last_name,
+            'is_admin'   => 1,
+            'email'      => $request->email,
+            'password'   => Hash::make($request->password),
         ]);
+
+        $activation_code->active = 0;
+        $activation_code->save();
 
         event(new Registered($user));
 

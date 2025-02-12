@@ -1,4 +1,4 @@
-import ApplicationLogo from '@/Components/ApplicationLogo';
+// import ApplicationLogo from '@/Components/ApplicationLogo';
 import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
@@ -21,8 +21,12 @@ export default function Authenticated({
                     <div className="flex h-16 justify-between">
                         <div className="flex">
                             <div className="flex shrink-0 items-center">
-                                <Link href="/">
-                                    <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" />
+                                <Link
+                                    href="/"
+                                    className="text-xl font-extrabold"
+                                >
+                                    {/* <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" /> */}
+                                    ZCoins
                                 </Link>
                             </div>
 
@@ -32,6 +36,13 @@ export default function Authenticated({
                                     active={route().current('dashboard')}
                                 >
                                     Dashboard
+                                </NavLink>
+
+                                <NavLink
+                                    href={route('activation-codes')}
+                                    active={route().current('activation-codes')}
+                                >
+                                    Activation Codes
                                 </NavLink>
                             </div>
                         </div>
@@ -45,7 +56,7 @@ export default function Authenticated({
                                                 type="button"
                                                 className="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none"
                                             >
-                                                {user.name}
+                                                {user.first_name}
 
                                                 <svg
                                                     className="-me-0.5 ms-2 h-4 w-4"
@@ -142,7 +153,7 @@ export default function Authenticated({
                     <div className="border-t border-gray-200 pb-1 pt-4">
                         <div className="px-4">
                             <div className="text-base font-medium text-gray-800">
-                                {user.name}
+                                {user.first_name}
                             </div>
                             <div className="text-sm font-medium text-gray-500">
                                 {user.email}
