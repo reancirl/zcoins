@@ -11,6 +11,7 @@ class ActivationCode extends Model
      */
     protected $fillable = [
         'code', 
+        'security_code', 
         'created_by', 
     ];
 

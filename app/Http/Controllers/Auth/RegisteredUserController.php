@@ -35,7 +35,7 @@ class RegisteredUserController extends Controller
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'activation_code' => 'required|string|max:255',
-            'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
+            'email' => 'required|string|lowercase|email|max:255|unique:' . User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
@@ -45,21 +45,23 @@ class RegisteredUserController extends Controller
             return back()->withErrors(['activation_code' => 'Invalid activation code provided.'])->withInput();
         }
 
+        // Create the user and store the activation code used
         $user = User::create([
             'first_name' => $request->first_name,
-            'last_name'  => $request->last_name,
-            'is_admin'   => 1,
-            'email'      => $request->email,
-            'password'   => Hash::make($request->password),
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'code_used' => $request->activation_code,
         ]);
 
+        // Deactivate the activation code (but leave it available for cross-check)
         $activation_code->active = 0;
         $activation_code->save();
 
         event(new Registered($user));
-
         Auth::login($user);
 
         return redirect(route('dashboard', absolute: false));
     }
+
 }

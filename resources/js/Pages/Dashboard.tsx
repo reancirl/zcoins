@@ -1,7 +1,21 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head } from '@inertiajs/react';
+import { Head, usePage } from '@inertiajs/react';
 
 export default function Dashboard() {
+    // Retrieve the auth object from Inertia's shared props.
+    const { auth } = usePage().props;
+    const user = auth.user;
+
+    // Determine a welcome message based on the user's role and status.
+    let welcomeMessage = "You're logged in!";
+    if (user.is_admin) {
+        welcomeMessage = 'Welcome back, Admin!';
+    } else if (!user.official_member) {
+        welcomeMessage = 'Your account needs to be verified.';
+    } else {
+        welcomeMessage = 'Welcome back!';
+    }
+
     return (
         <AuthenticatedLayout
             header={
@@ -16,7 +30,7 @@ export default function Dashboard() {
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900">
-                            You're logged in!
+                            {welcomeMessage}
                         </div>
                     </div>
                 </div>

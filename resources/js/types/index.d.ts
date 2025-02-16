@@ -1,6 +1,8 @@
 import { Config } from 'ziggy-js';
 
 export interface User {
+    official_member: boolean;
+    is_admin: boolean;
     id: number;
     first_name: string;
     last_name: string;

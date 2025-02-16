@@ -1,16 +1,24 @@
-// import ApplicationLogo from '@/Components/ApplicationLogo';
 import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
+import { PageProps } from '@/types'; // Adjust the import path accordingly
 import { Link, usePage } from '@inertiajs/react';
 import { PropsWithChildren, ReactNode, useState } from 'react';
+
+interface SharedProps extends PageProps {
+    flash: {
+        success?: string;
+        error?: string;
+    };
+}
 
 export default function Authenticated({
     header,
     children,
 }: PropsWithChildren<{ header?: ReactNode }>) {
-    const user = usePage().props.auth.user;
-
+    // Now use the SharedProps type
+    const { auth, flash } = usePage<SharedProps>().props;
+    const user = auth.user;
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
 
@@ -25,7 +33,6 @@ export default function Authenticated({
                                     href="/"
                                     className="text-xl font-extrabold"
                                 >
-                                    {/* <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" /> */}
                                     ZCoins
                                 </Link>
                             </div>
@@ -38,12 +45,36 @@ export default function Authenticated({
                                     Dashboard
                                 </NavLink>
 
-                                <NavLink
-                                    href={route('activation-codes')}
-                                    active={route().current('activation-codes')}
-                                >
-                                    Activation Codes
-                                </NavLink>
+                                {user && user.is_admin && (
+                                    <NavLink
+                                        href={route('activation-codes')}
+                                        active={route().current(
+                                            'activation-codes',
+                                        )}
+                                    >
+                                        Activation Codes
+                                    </NavLink>
+                                )}
+
+                                {user && user.is_admin && (
+                                    <NavLink
+                                        href={route('pending-members')}
+                                        active={route().current(
+                                            'pending-members',
+                                        )}
+                                    >
+                                        Pending Members
+                                    </NavLink>
+                                )}
+
+                                {user && user.is_admin && (
+                                    <NavLink
+                                        href={route('members')}
+                                        active={route().current('members')}
+                                    >
+                                        Members
+                                    </NavLink>
+                                )}
                             </div>
                         </div>
 
@@ -57,7 +88,6 @@ export default function Authenticated({
                                                 className="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none"
                                             >
                                                 {user.first_name}
-
                                                 <svg
                                                     className="-me-0.5 ms-2 h-4 w-4"
                                                     xmlns="http://www.w3.org/2000/svg"
@@ -182,6 +212,30 @@ export default function Authenticated({
                         {header}
                     </div>
                 </header>
+            )}
+
+            {/* Flash messages */}
+            {flash.success && (
+                <div className="mx-auto mt-4 max-w-7xl px-4 sm:px-6 lg:px-8">
+                    <div
+                        className="relative rounded border border-green-400 bg-green-100 px-4 py-3 text-green-700"
+                        role="alert"
+                    >
+                        <strong className="font-bold">Success: </strong>
+                        <span className="block sm:inline">{flash.success}</span>
+                    </div>
+                </div>
+            )}
+            {flash.error && (
+                <div className="mx-auto mt-4 max-w-7xl px-4 sm:px-6 lg:px-8">
+                    <div
+                        className="relative rounded border border-red-400 bg-red-100 px-4 py-3 text-red-700"
+                        role="alert"
+                    >
+                        <strong className="font-bold">Error: </strong>
+                        <span className="block sm:inline">{flash.error}</span>
+                    </div>
+                </div>
             )}
 
             <main>{children}</main>
