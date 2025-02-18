@@ -8,7 +8,7 @@ interface PendingUser {
     last_name: string;
     code_used: string;
     email: string;
-    parent_id: string | null;
+    sponsor_id: string | null;
 }
 
 interface OfficialMember {
@@ -97,7 +97,7 @@ function PendingUserRow({ user, officialMembers }: PendingUserRowProps) {
     // The useForm hook automatically includes the necessary Inertia headers.
     const { data, setData, post, processing, errors } = useForm({
         security_code: '',
-        parent_id: '',
+        sponsor_id: '',
     });
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -137,8 +137,8 @@ function PendingUserRow({ user, officialMembers }: PendingUserRowProps) {
             </td>
             <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-900">
                 <select
-                    value={data.parent_id}
-                    onChange={(e) => setData('parent_id', e.target.value)}
+                    value={data.sponsor_id}
+                    onChange={(e) => setData('sponsor_id', e.target.value)}
                     className="w-64 rounded border border-gray-300 px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
                     <option value="">Select a Parent</option>
@@ -148,9 +148,9 @@ function PendingUserRow({ user, officialMembers }: PendingUserRowProps) {
                         </option>
                     ))}
                 </select>
-                {errors.parent_id && (
+                {errors.sponsor_id && (
                     <div className="text-xs text-red-600">
-                        {errors.parent_id}
+                        {errors.sponsor_id}
                     </div>
                 )}
             </td>

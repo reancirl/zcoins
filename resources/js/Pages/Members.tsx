@@ -6,7 +6,7 @@ interface Member {
     first_name: string;
     last_name: string;
     email: string;
-    parent_id: string | null;
+    sponsor_id: string | null;
     // add additional fields as needed
 }
 
@@ -46,7 +46,7 @@ export default function Members({ members }: MembersProps) {
                                             Email
                                         </th>
                                         <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
-                                            Parent
+                                            Sponsor
                                         </th>
                                     </tr>
                                 </thead>
@@ -64,7 +64,7 @@ export default function Members({ members }: MembersProps) {
                                                 {member.email}
                                             </td>
                                             <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-900">
-                                                {member.parent_id || '—'}
+                                                {member.sponsor_id || '—'}
                                             </td>
                                         </tr>
                                     ))}

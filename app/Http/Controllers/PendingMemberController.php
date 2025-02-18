@@ -11,7 +11,7 @@ class PendingMemberController extends Controller
     /**
      * Display a listing of pending members.
      *
-     * Pending members are defined as non‑admin users who have no parent_id
+     * Pending members are defined as non‑admin users who have no sponsor_id
      * and are not yet marked as official members.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -20,7 +20,7 @@ class PendingMemberController extends Controller
     public function index(Request $request)
     {
         $pendingUsers = User::where('is_admin', false)
-            ->whereNull('parent_id')
+            ->whereNull('sponsor_id')
             ->where('official_member', false)
             ->get();
 
@@ -47,14 +47,14 @@ class PendingMemberController extends Controller
         // Validate the request and capture the validated fields.
         $validated = $request->validate([
             'security_code' => 'required|string|max:255',
-            'parent_id' => 'required|exists:users,id',
+            'sponsor_id' => 'required|exists:users,id',
         ]);
 
         // Retrieve the pending user.
         $user = User::findOrFail($id);
 
         // Ensure the user is pending (non-admin, has no parent, and is not yet an official member).
-        if ($user->is_admin || $user->parent_id !== null || $user->official_member) {
+        if ($user->is_admin || $user->sponsor_id !== null || $user->official_member) {
             return redirect()->back()->withErrors(['error' => 'User is not pending.']);
         }
 
@@ -78,9 +78,9 @@ class PendingMemberController extends Controller
             $activationCode->member_activated = true;
             $activationCode->save();
 
-            // Update the user: assign the parent_id and mark as an official member.
+            // Update the user: assign the sponsor_id and mark as an official member.
             $user->update([
-                'parent_id' => $validated['parent_id'],
+                'sponsor_id' => $validated['sponsor_id'],
                 'official_member' => true,
             ]);
         });

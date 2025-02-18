@@ -62,7 +62,7 @@ export default function ActivationCodes({
                                             Security Code
                                         </th>
                                         <th className="px-6 py-3 text-left">
-                                            Active
+                                            Status
                                         </th>
                                     </tr>
                                 </thead>
@@ -79,7 +79,9 @@ export default function ActivationCodes({
                                                 {code.security_code}
                                             </td>
                                             <td className="whitespace-nowrap px-6 py-4">
-                                                {code.active ? 'Yes' : 'No'}
+                                                {code.active
+                                                    ? 'Unused'
+                                                    : 'Used'}
                                             </td>
                                         </tr>
                                     ))}
