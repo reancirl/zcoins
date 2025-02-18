@@ -10,10 +10,8 @@ export default function Dashboard() {
     let welcomeMessage = "You're logged in!";
     if (user.is_admin) {
         welcomeMessage = 'Welcome back, Admin!';
-    } else if (!user.official_member) {
-        welcomeMessage = 'Your account needs to be verified.';
     } else {
-        welcomeMessage = 'Welcome back!';
+        welcomeMessage = 'Welcome to ZPLANET PORTAL!';
     }
 
     return (

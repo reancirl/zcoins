@@ -1,12 +1,10 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\ActivationCodeController;
 use App\Http\Middleware\AdminMiddleware;
-use App\Http\Controllers\PendingMemberController;
 use App\Http\Controllers\MemberController;
 
 Route::get('/', function () {
@@ -29,18 +27,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 
     Route::middleware(['auth', 'verified', AdminMiddleware::class])->group(function () {
-        // Pending Members page (lists all pending users)
-        Route::get('/pending-members', [PendingMemberController::class, 'index'])
-            ->name('pending-members');
-
-        // Process pending member update (approve member)
-        Route::post('/pending-members/{id}', [PendingMemberController::class, 'update'])
-            ->name('pending-members.update');
-    });
-
-    Route::middleware(['auth', 'verified', AdminMiddleware::class])->group(function () {
         Route::get('/members', [MemberController::class, 'index'])->name('members');
-    });    
+    });
 });
 
 Route::middleware('auth')->group(function () {

@@ -58,17 +58,6 @@ export default function Authenticated({
 
                                 {user && user.is_admin && (
                                     <NavLink
-                                        href={route('pending-members')}
-                                        active={route().current(
-                                            'pending-members',
-                                        )}
-                                    >
-                                        Pending Members
-                                    </NavLink>
-                                )}
-
-                                {user && user.is_admin && (
-                                    <NavLink
                                         href={route('members')}
                                         active={route().current('members')}
                                     >

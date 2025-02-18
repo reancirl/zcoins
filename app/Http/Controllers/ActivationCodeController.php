@@ -17,7 +17,7 @@ class ActivationCodeController extends Controller
      */
     public function index(Request $request)
     {
-        $activationCodes = ActivationCode::where('member_activated', false)->get();
+        $activationCodes = ActivationCode::get();
 
         return Inertia::render('ActivationCode', [
             'activationCodes' => $activationCodes,

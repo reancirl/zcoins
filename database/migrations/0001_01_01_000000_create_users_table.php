@@ -13,15 +13,30 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('email')->unique();
             $table->boolean('is_admin')->default(false);
-            $table->boolean('official_member')->default(false);
-            $table->string('code_used')->nullable();
-            $table->string('sponsor_id')->nullable();
+            $table->string('username')->unique();
+            $table->string('email')->unique();
             $table->string('first_name');
             $table->string('last_name');
+            $table->string('middle_name')->nullable();
+            $table->string('mobile_number')->nullable();
+            $table->string('code_used')->nullable();
+            $table->string('sponsor_id')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+
+            // Address
+            $table->string('address')->nullable();
+            $table->string('address2')->nullable();
+            $table->string('province')->nullable();
+            $table->string('city')->nullable();
+            $table->string('zipcode')->nullable();
+            $table->string('country')->default('PH');
+
+            //Disbursement
+            $table->string('bank_name')->nullable();
+            $table->string('account_name')->nullable();
+            $table->string('account_number')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

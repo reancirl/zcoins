@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('activation_codes', function (Blueprint $table) {
             $table->id();
             $table->boolean('active')->default(1);
-            $table->boolean('member_activated')->default(0);
             $table->string('code')->unique();
             $table->string('security_code')->unique();
             $table->unsignedBigInteger('created_by');

@@ -19,22 +19,25 @@ class DatabaseSeeder extends Seeder
         $admin = User::firstOrCreate(
             ['email' => 'admin@admin.com'],
             [
-                'is_admin'   => true,
-                'official_member'   => true,
+                'is_admin' => true,
+                'username' => 'admin', // Added username
                 'first_name' => 'Admin',
-                'last_name'  => 'User',
-                'password'   => Hash::make('password'),
+                'last_name' => 'User',
+                'password' => Hash::make('password'),
+                // You can also set additional fields if needed:
+                // 'mobile_number' => '1234567890',
+                // 'address'       => '123 Admin St.',
             ]
         );
 
         User::firstOrCreate(
             ['email' => 'lumax@admin.com'],
             [
-                'is_admin'   => true,
-                'official_member'   => true,
+                'is_admin' => true,
+                'username' => 'lumax', // Added username
                 'first_name' => 'Lumax',
-                'last_name'  => 'User',
-                'password'   => Hash::make('password'),
+                'last_name' => 'User',
+                'password' => Hash::make('password'),
             ]
         );
 
@@ -43,10 +46,10 @@ class DatabaseSeeder extends Seeder
         // Create 10 activation codes for the admin user.
         for ($i = 0; $i < 10; $i++) {
             ActivationCode::create([
-                'code'       => Str::upper(Str::random(10)),
-                'security_code'       => Str::upper(Str::random(10)),
-                'created_by' => $admin->id, // Should be 1 if admin is the first user.
-                'active'     => true, // Optional since the default is true.
+                'code' => Str::upper(Str::random(10)),
+                'security_code' => Str::upper(Str::random(10)),
+                'created_by' => $admin->id,
+                'active' => true,
             ]);
         }
 
