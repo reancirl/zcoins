@@ -47,4 +47,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(User::class, 'sponsor_id');
     }
+
+    public function activationCodeRecord()
+    {
+        return $this->hasOne(ActivationCode::class, 'code', 'code_used');
+    }
 }

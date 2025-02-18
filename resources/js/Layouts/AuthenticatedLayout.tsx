@@ -64,6 +64,17 @@ export default function Authenticated({
                                         Members
                                     </NavLink>
                                 )}
+
+                                {user && user.is_admin && (
+                                    <NavLink
+                                        href={route('activation-codes.history')}
+                                        active={route().current(
+                                            'activation-codes.history',
+                                        )}
+                                    >
+                                        History - Activation Codes
+                                    </NavLink>
+                                )}
                             </div>
                         </div>
 

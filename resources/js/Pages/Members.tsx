@@ -7,7 +7,6 @@ interface Member {
     last_name: string;
     email: string;
     sponsor_id: string | null;
-    // add additional fields as needed
 }
 
 interface MembersProps {
