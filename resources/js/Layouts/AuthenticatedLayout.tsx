@@ -75,7 +75,6 @@ export default function Authenticated({
                                         History - Activation Codes
                                     </NavLink>
                                 )}
-
                             </div>
                         </div>
 

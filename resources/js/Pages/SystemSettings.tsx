@@ -46,6 +46,28 @@ export default function SystemSettings({ settings }: SystemSettingsProps) {
                         <form onSubmit={submit}>
                             <div>
                                 <label
+                                    htmlFor="default_currency"
+                                    className="block text-sm font-medium text-gray-700"
+                                >
+                                    Default Currency Code
+                                </label>
+                                <input
+                                    id="default_currency"
+                                    type="text"
+                                    maxLength={3}
+                                    readOnly
+                                    className="mt-1 block w-full cursor-not-allowed rounded-md border-gray-300 bg-gray-200 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                    value={data.default_currency}
+                                />
+                                {errors.default_currency && (
+                                    <p className="mt-2 text-sm text-red-600">
+                                        {errors.default_currency}
+                                    </p>
+                                )}
+                            </div>
+
+                            <div className="mt-4">
+                                <label
                                     htmlFor="zcoins_value_to_php"
                                     className="block text-sm font-medium text-gray-700"
                                 >
@@ -67,28 +89,6 @@ export default function SystemSettings({ settings }: SystemSettingsProps) {
                                 {errors.zcoins_value_to_php && (
                                     <p className="mt-2 text-sm text-red-600">
                                         {errors.zcoins_value_to_php}
-                                    </p>
-                                )}
-                            </div>
-
-                            <div className="mt-4">
-                                <label
-                                    htmlFor="default_currency"
-                                    className="block text-sm font-medium text-gray-700"
-                                >
-                                    Default Currency Code
-                                </label>
-                                <input
-                                    id="default_currency"
-                                    type="text"
-                                    maxLength={3}
-                                    readOnly
-                                    className="mt-1 block w-full cursor-not-allowed rounded-md border-gray-300 bg-gray-200 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                                    value={data.default_currency}
-                                />
-                                {errors.default_currency && (
-                                    <p className="mt-2 text-sm text-red-600">
-                                        {errors.default_currency}
                                     </p>
                                 )}
                             </div>

@@ -58,6 +58,7 @@ class RegisteredUserController extends Controller
         // Verify that both the activation code and security code match a record.
         $activationCode = ActivationCode::where('code', $request->activation_code)
             ->where('security_code', $request->security_code)
+            ->where('active',1)
             ->first();
 
         if (!$activationCode) {
