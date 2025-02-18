@@ -6,7 +6,7 @@ interface Member {
     first_name: string;
     last_name: string;
     email: string;
-    sponsor_id: string | null;
+    sponsor: string | null;
 }
 
 interface MembersProps {
@@ -63,7 +63,7 @@ export default function Members({ members }: MembersProps) {
                                                 {member.email}
                                             </td>
                                             <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-900">
-                                                {member.sponsor_id || '—'}
+                                                {member.sponsor || '—'}
                                             </td>
                                         </tr>
                                     ))}
