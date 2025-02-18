@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
         );
 
         User::firstOrCreate(
-            ['email' => 'lumax@admin.com'],
+            ['email' => 'luyaomacartin@gmail.com'],
             [
                 'is_admin' => true,
                 'username' => 'lumax', // Added username
