@@ -6,9 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class SystemSetting extends Model
 {
-    protected $guarded = [];
-    public static function getZcoinConversionRate(): int
+    protected $fillable = [
+        'zcoins_value_to_php',
+        'default_currency',
+    ];
+
+    /**
+     * Retrieve the global system settings.
+     * Assumes only one record exists.
+     */
+    public static function getSettings(): self
     {
-        return (int) static::first()->zcoins_value_to_php;
+        return static::first() ?? new static();
     }
 }

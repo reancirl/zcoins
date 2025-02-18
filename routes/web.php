@@ -7,6 +7,7 @@ use App\Http\Controllers\ActivationCodeController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\ActivationCodeHistoryController;
+use App\Http\Controllers\SystemSettingsController;
 
 Route::get('/', function () {
     return redirect('/login');
@@ -31,7 +32,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/members', [MemberController::class, 'index'])->name('members');
 
         Route::get('/activation-codes/history', [ActivationCodeHistoryController::class, 'index'])
-         ->name('activation-codes.history');
+            ->name('activation-codes.history');
+
+        Route::get('/system-settings', [SystemSettingsController::class, 'index'])
+            ->name('system-settings.index');
+        Route::post('/system-settings', [SystemSettingsController::class, 'update'])
+            ->name('system-settings.update');
     });
 });
 

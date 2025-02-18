@@ -75,6 +75,7 @@ export default function Authenticated({
                                         History - Activation Codes
                                     </NavLink>
                                 )}
+
                             </div>
                         </div>
 
@@ -110,6 +111,15 @@ export default function Authenticated({
                                         >
                                             Profile
                                         </Dropdown.Link>
+                                        {user && user.is_admin && (
+                                            <Dropdown.Link
+                                                href={route(
+                                                    'system-settings.index',
+                                                )}
+                                            >
+                                                System Settings
+                                            </Dropdown.Link>
+                                        )}
                                         <Dropdown.Link
                                             href={route('logout')}
                                             method="post"
