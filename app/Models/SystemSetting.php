@@ -6,10 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class SystemSetting extends Model
 {
-    protected $fillable = [
-        'zcoins_value_to_php',
-        'default_currency',
-    ];
+    protected $guarded = [];
 
     /**
      * Retrieve the global system settings.
