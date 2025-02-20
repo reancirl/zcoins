@@ -7,6 +7,7 @@ interface SystemSettingsProps {
         id?: number;
         zcoins_value_to_php: number;
         default_currency: string;
+        membership_fee_php: number;
         direct_referral_bonus_zcoins: number;
         buy_zcoins_interest_percent: number;
         buy_zcoins_daily_interest_for_late_payment_percent: number;
@@ -32,18 +33,18 @@ interface SystemSettingsProps {
         duplication_bonus_level_10: number;
         duplication_bonus_level_11: number;
         duplication_bonus_level_12: number;
-        incentives_percent_level_1: number;
-        incentives_percent_level_2: number;
-        incentives_percent_level_3: number;
-        incentives_percent_level_4: number;
-        incentives_percent_level_5: number;
-        incentives_percent_level_6: number;
-        incentives_percent_level_7: number;
-        incentives_percent_level_8: number;
-        incentives_percent_level_9: number;
-        incentives_percent_level_10: number;
-        incentives_percent_level_11: number;
-        incentives_percent_level_12: number;
+        incentives_percent_level_1: string;
+        incentives_percent_level_2: string;
+        incentives_percent_level_3: string;
+        incentives_percent_level_4: string;
+        incentives_percent_level_5: string;
+        incentives_percent_level_6: string;
+        incentives_percent_level_7: string;
+        incentives_percent_level_8: string;
+        incentives_percent_level_9: string;
+        incentives_percent_level_10: string;
+        incentives_percent_level_11: string;
+        incentives_percent_level_12: string;
         patronage_bonus_level_1: number;
         patronage_bonus_level_2: number;
         patronage_bonus_level_3: number;
@@ -74,6 +75,7 @@ export default function SystemSettings({ settings }: SystemSettingsProps) {
     const { data, setData, post, processing, errors } = useForm({
         zcoins_value_to_php: settings.zcoins_value_to_php || 60,
         default_currency: settings.default_currency || 'PHP',
+        membership_fee_php: settings.membership_fee_php || 500,
         direct_referral_bonus_zcoins:
             settings.direct_referral_bonus_zcoins || 0,
         buy_zcoins_interest_percent: settings.buy_zcoins_interest_percent || 0,
@@ -106,18 +108,30 @@ export default function SystemSettings({ settings }: SystemSettingsProps) {
         duplication_bonus_level_10: settings.duplication_bonus_level_10 || 0,
         duplication_bonus_level_11: settings.duplication_bonus_level_11 || 0,
         duplication_bonus_level_12: settings.duplication_bonus_level_12 || 0,
-        incentives_percent_level_1: settings.incentives_percent_level_1 || 0,
-        incentives_percent_level_2: settings.incentives_percent_level_2 || 0,
-        incentives_percent_level_3: settings.incentives_percent_level_3 || 0,
-        incentives_percent_level_4: settings.incentives_percent_level_4 || 0,
-        incentives_percent_level_5: settings.incentives_percent_level_5 || 0,
-        incentives_percent_level_6: settings.incentives_percent_level_6 || 0,
-        incentives_percent_level_7: settings.incentives_percent_level_7 || 0,
-        incentives_percent_level_8: settings.incentives_percent_level_8 || 0,
-        incentives_percent_level_9: settings.incentives_percent_level_9 || 0,
-        incentives_percent_level_10: settings.incentives_percent_level_10 || 0,
-        incentives_percent_level_11: settings.incentives_percent_level_11 || 0,
-        incentives_percent_level_12: settings.incentives_percent_level_12 || 0,
+        incentives_percent_level_1:
+            settings.incentives_percent_level_1 || 'Not Indicated',
+        incentives_percent_level_2:
+            settings.incentives_percent_level_2 || 'Not Indicated',
+        incentives_percent_level_3:
+            settings.incentives_percent_level_3 || 'Not Indicated',
+        incentives_percent_level_4:
+            settings.incentives_percent_level_4 || 'Not Indicated',
+        incentives_percent_level_5:
+            settings.incentives_percent_level_5 || 'Not Indicated',
+        incentives_percent_level_6:
+            settings.incentives_percent_level_6 || 'Not Indicated',
+        incentives_percent_level_7:
+            settings.incentives_percent_level_7 || 'Not Indicated',
+        incentives_percent_level_8:
+            settings.incentives_percent_level_8 || 'Not Indicated',
+        incentives_percent_level_9:
+            settings.incentives_percent_level_9 || 'Not Indicated',
+        incentives_percent_level_10:
+            settings.incentives_percent_level_10 || 'Not Indicated',
+        incentives_percent_level_11:
+            settings.incentives_percent_level_11 || 'Not Indicated',
+        incentives_percent_level_12:
+            settings.incentives_percent_level_12 || 'Not Indicated',
         patronage_bonus_level_1: settings.patronage_bonus_level_1 || 0,
         patronage_bonus_level_2: settings.patronage_bonus_level_2 || 0,
         patronage_bonus_level_3: settings.patronage_bonus_level_3 || 0,
@@ -143,6 +157,7 @@ export default function SystemSettings({ settings }: SystemSettingsProps) {
         setData({
             zcoins_value_to_php: settings.zcoins_value_to_php || 60,
             default_currency: settings.default_currency || 'PHP',
+            membership_fee_php: settings.membership_fee_php || 60,
             direct_referral_bonus_zcoins:
                 settings.direct_referral_bonus_zcoins || 0,
             buy_zcoins_interest_percent:
@@ -184,29 +199,29 @@ export default function SystemSettings({ settings }: SystemSettingsProps) {
             duplication_bonus_level_12:
                 settings.duplication_bonus_level_12 || 0,
             incentives_percent_level_1:
-                settings.incentives_percent_level_1 || 0,
+                settings.incentives_percent_level_1 || 'Not Indicated',
             incentives_percent_level_2:
-                settings.incentives_percent_level_2 || 0,
+                settings.incentives_percent_level_2 || 'Not Indicated',
             incentives_percent_level_3:
-                settings.incentives_percent_level_3 || 0,
+                settings.incentives_percent_level_3 || 'Not Indicated',
             incentives_percent_level_4:
-                settings.incentives_percent_level_4 || 0,
+                settings.incentives_percent_level_4 || 'Not Indicated',
             incentives_percent_level_5:
-                settings.incentives_percent_level_5 || 0,
+                settings.incentives_percent_level_5 || 'Not Indicated',
             incentives_percent_level_6:
-                settings.incentives_percent_level_6 || 0,
+                settings.incentives_percent_level_6 || 'Not Indicated',
             incentives_percent_level_7:
-                settings.incentives_percent_level_7 || 0,
+                settings.incentives_percent_level_7 || 'Not Indicated',
             incentives_percent_level_8:
-                settings.incentives_percent_level_8 || 0,
+                settings.incentives_percent_level_8 || 'Not Indicated',
             incentives_percent_level_9:
-                settings.incentives_percent_level_9 || 0,
+                settings.incentives_percent_level_9 || 'Not Indicated',
             incentives_percent_level_10:
-                settings.incentives_percent_level_10 || 0,
+                settings.incentives_percent_level_10 || 'Not Indicated',
             incentives_percent_level_11:
-                settings.incentives_percent_level_11 || 0,
+                settings.incentives_percent_level_11 || 'Not Indicated',
             incentives_percent_level_12:
-                settings.incentives_percent_level_12 || 0,
+                settings.incentives_percent_level_12 || 'Not Indicated',
             patronage_bonus_level_1: settings.patronage_bonus_level_1 || 0,
             patronage_bonus_level_2: settings.patronage_bonus_level_2 || 0,
             patronage_bonus_level_3: settings.patronage_bonus_level_3 || 0,
@@ -263,7 +278,7 @@ export default function SystemSettings({ settings }: SystemSettingsProps) {
                                 <h3 className="mb-4 text-lg font-semibold">
                                     General Settings
                                 </h3>
-                                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                                <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
                                     <div>
                                         <label
                                             htmlFor="zcoins_value_to_php"
@@ -280,7 +295,7 @@ export default function SystemSettings({ settings }: SystemSettingsProps) {
                                             onChange={(e) =>
                                                 setData(
                                                     'zcoins_value_to_php',
-                                                    parseInt(e.target.value),
+                                                    parseFloat(e.target.value),
                                                 )
                                             }
                                             required
@@ -312,10 +327,36 @@ export default function SystemSettings({ settings }: SystemSettingsProps) {
                                             </p>
                                         )}
                                     </div>
+                                    <div>
+                                        <label
+                                            htmlFor="membership_fee_php"
+                                            className="block text-sm font-medium text-gray-700"
+                                        >
+                                            Membership Fee (PHP)
+                                        </label>
+                                        <input
+                                            id="membership_fee_php"
+                                            type="number"
+                                            step="0.01"
+                                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                            value={data.membership_fee_php}
+                                            onChange={(e) =>
+                                                setData(
+                                                    'membership_fee_php',
+                                                    parseFloat(e.target.value),
+                                                )
+                                            }
+                                            required
+                                        />
+                                        {errors.membership_fee_php && (
+                                            <p className="mt-2 text-sm text-red-600">
+                                                {errors.membership_fee_php}
+                                            </p>
+                                        )}
+                                    </div>
                                 </div>
                             </div>
                         )}
-
                         {/* Referral Settings */}
                         {activeTab === 'referral' && (
                             <div className="mt-6">
@@ -340,7 +381,7 @@ export default function SystemSettings({ settings }: SystemSettingsProps) {
                                             onChange={(e) =>
                                                 setData(
                                                     'direct_referral_bonus_zcoins',
-                                                    parseInt(e.target.value),
+                                                    parseFloat(e.target.value),
                                                 )
                                             }
                                         />
@@ -369,7 +410,7 @@ export default function SystemSettings({ settings }: SystemSettingsProps) {
                                             onChange={(e) =>
                                                 setData(
                                                     'buy_zcoins_interest_percent',
-                                                    parseInt(e.target.value),
+                                                    parseFloat(e.target.value),
                                                 )
                                             }
                                         />
@@ -398,7 +439,7 @@ export default function SystemSettings({ settings }: SystemSettingsProps) {
                                             onChange={(e) =>
                                                 setData(
                                                     'buy_zcoins_daily_interest_for_late_payment_percent',
-                                                    parseInt(e.target.value),
+                                                    parseFloat(e.target.value),
                                                 )
                                             }
                                         />
@@ -427,7 +468,7 @@ export default function SystemSettings({ settings }: SystemSettingsProps) {
                                             onChange={(e) =>
                                                 setData(
                                                     'deduction_for_processing_fee_php',
-                                                    parseInt(e.target.value),
+                                                    parseFloat(e.target.value),
                                                 )
                                             }
                                         />
@@ -467,7 +508,7 @@ export default function SystemSettings({ settings }: SystemSettingsProps) {
                                             onChange={(e) =>
                                                 setData(
                                                     'lock_20_zcoins_unlock_count',
-                                                    parseInt(e.target.value),
+                                                    parseFloat(e.target.value),
                                                 )
                                             }
                                         />
@@ -496,7 +537,7 @@ export default function SystemSettings({ settings }: SystemSettingsProps) {
                                             onChange={(e) =>
                                                 setData(
                                                     'lock_60_zcoins_unlock_count',
-                                                    parseInt(e.target.value),
+                                                    parseFloat(e.target.value),
                                                 )
                                             }
                                         />
@@ -525,7 +566,7 @@ export default function SystemSettings({ settings }: SystemSettingsProps) {
                                             onChange={(e) =>
                                                 setData(
                                                     'lock_100_zcoins_unlock_count',
-                                                    parseInt(e.target.value),
+                                                    parseFloat(e.target.value),
                                                 )
                                             }
                                         />
@@ -554,7 +595,7 @@ export default function SystemSettings({ settings }: SystemSettingsProps) {
                                             onChange={(e) =>
                                                 setData(
                                                     'lock_200_zcoins_unlock_count',
-                                                    parseInt(e.target.value),
+                                                    parseFloat(e.target.value),
                                                 )
                                             }
                                         />
@@ -583,7 +624,7 @@ export default function SystemSettings({ settings }: SystemSettingsProps) {
                                             onChange={(e) =>
                                                 setData(
                                                     'lock_400_zcoins_unlock_count',
-                                                    parseInt(e.target.value),
+                                                    parseFloat(e.target.value),
                                                 )
                                             }
                                         />
@@ -612,7 +653,7 @@ export default function SystemSettings({ settings }: SystemSettingsProps) {
                                             onChange={(e) =>
                                                 setData(
                                                     'lock_1000_zcoins_unlock_count',
-                                                    parseInt(e.target.value),
+                                                    parseFloat(e.target.value),
                                                 )
                                             }
                                         />
@@ -652,7 +693,7 @@ export default function SystemSettings({ settings }: SystemSettingsProps) {
                                             onChange={(e) =>
                                                 setData(
                                                     'sell_zcoins_charge_percent',
-                                                    parseInt(e.target.value),
+                                                    parseFloat(e.target.value),
                                                 )
                                             }
                                         />
@@ -679,7 +720,7 @@ export default function SystemSettings({ settings }: SystemSettingsProps) {
                                             onChange={(e) =>
                                                 setData(
                                                     'deduction_for_zcare_php',
-                                                    parseInt(e.target.value),
+                                                    parseFloat(e.target.value),
                                                 )
                                             }
                                         />
@@ -706,7 +747,7 @@ export default function SystemSettings({ settings }: SystemSettingsProps) {
                                             onChange={(e) =>
                                                 setData(
                                                     'rebates_cashback_percent',
-                                                    parseInt(e.target.value),
+                                                    parseFloat(e.target.value),
                                                 )
                                             }
                                         />
@@ -759,7 +800,7 @@ export default function SystemSettings({ settings }: SystemSettingsProps) {
                                                     onChange={(e) =>
                                                         setData(
                                                             `duplication_bonus_level_${level}` as keyof typeof data,
-                                                            parseInt(
+                                                            parseFloat(
                                                                 e.target.value,
                                                             ),
                                                         )
@@ -814,13 +855,13 @@ export default function SystemSettings({ settings }: SystemSettingsProps) {
                                                 </label>
                                                 <input
                                                     id={`incentives_percent_level_${level}`}
-                                                    type="number"
+                                                    type="text"
                                                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                                                     value={
                                                         (
                                                             data as unknown as Record<
                                                                 string,
-                                                                never
+                                                                string
                                                             >
                                                         )[
                                                             `incentives_percent_level_${level}`
@@ -829,9 +870,7 @@ export default function SystemSettings({ settings }: SystemSettingsProps) {
                                                     onChange={(e) =>
                                                         setData(
                                                             `incentives_percent_level_${level}` as keyof typeof data,
-                                                            parseInt(
-                                                                e.target.value,
-                                                            ),
+                                                            e.target.value,
                                                         )
                                                     }
                                                 />
@@ -899,7 +938,7 @@ export default function SystemSettings({ settings }: SystemSettingsProps) {
                                                     onChange={(e) =>
                                                         setData(
                                                             `patronage_bonus_level_${level}` as keyof typeof data,
-                                                            parseInt(
+                                                            parseFloat(
                                                                 e.target.value,
                                                             ),
                                                         )

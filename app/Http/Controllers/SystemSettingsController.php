@@ -27,59 +27,71 @@ class SystemSettingsController extends Controller
     public function update(Request $request)
     {
         $validated = $request->validate([
-            'zcoins_value_to_php' => 'required|integer',
-            'direct_referral_bonus_zcoins' => 'required|integer',
-            'buy_zcoins_interest_percent' => 'required|integer',
-            'buy_zcoins_daily_interest_for_late_payment_percent' => 'required|integer',
-            'deduction_for_processing_fee_php' => 'required|integer',
+            // General Settings (decimals)
+            'zcoins_value_to_php' => 'required|numeric',
+            'default_currency' => 'required|string|max:3',
+            'membership_fee_php' => 'required|numeric',
+
+            // Referral Settings (decimals)
+            'direct_referral_bonus_zcoins' => 'required|numeric',
+            'buy_zcoins_interest_percent' => 'required|numeric',
+            'buy_zcoins_daily_interest_for_late_payment_percent' => 'required|numeric',
+            'deduction_for_processing_fee_php' => 'required|numeric',
+
+            // Lock Direct Referral Counts (integers)
             'lock_20_zcoins_unlock_count' => 'required|integer',
             'lock_60_zcoins_unlock_count' => 'required|integer',
             'lock_100_zcoins_unlock_count' => 'required|integer',
             'lock_200_zcoins_unlock_count' => 'required|integer',
             'lock_400_zcoins_unlock_count' => 'required|integer',
             'lock_1000_zcoins_unlock_count' => 'required|integer',
-            'sell_zcoins_charge_percent' => 'required|integer',
-            'deduction_for_zcare_php' => 'required|integer',
-            'rebates_cashback_percent' => 'required|integer',
-            // Validate duplication bonus levels
-            'duplication_bonus_level_1' => 'required|integer',
-            'duplication_bonus_level_2' => 'required|integer',
-            'duplication_bonus_level_3' => 'required|integer',
-            'duplication_bonus_level_4' => 'required|integer',
-            'duplication_bonus_level_5' => 'required|integer',
-            'duplication_bonus_level_6' => 'required|integer',
-            'duplication_bonus_level_7' => 'required|integer',
-            'duplication_bonus_level_8' => 'required|integer',
-            'duplication_bonus_level_9' => 'required|integer',
-            'duplication_bonus_level_10' => 'required|integer',
-            'duplication_bonus_level_11' => 'required|integer',
-            'duplication_bonus_level_12' => 'required|integer',
-            // Validate incentives percentages
-            'incentives_percent_level_1' => 'required|integer',
-            'incentives_percent_level_2' => 'required|integer',
-            'incentives_percent_level_3' => 'required|integer',
-            'incentives_percent_level_4' => 'required|integer',
-            'incentives_percent_level_5' => 'required|integer',
-            'incentives_percent_level_6' => 'required|integer',
-            'incentives_percent_level_7' => 'required|integer',
-            'incentives_percent_level_8' => 'required|integer',
-            'incentives_percent_level_9' => 'required|integer',
-            'incentives_percent_level_10' => 'required|integer',
-            'incentives_percent_level_11' => 'required|integer',
-            'incentives_percent_level_12' => 'required|integer',
-            // Validate patronage bonus levels
-            'patronage_bonus_level_1' => 'required|integer',
-            'patronage_bonus_level_2' => 'required|integer',
-            'patronage_bonus_level_3' => 'required|integer',
-            'patronage_bonus_level_4' => 'required|integer',
-            'patronage_bonus_level_5' => 'required|integer',
-            'patronage_bonus_level_6' => 'required|integer',
-            'patronage_bonus_level_7' => 'required|integer',
-            'patronage_bonus_level_8' => 'required|integer',
-            'patronage_bonus_level_9' => 'required|integer',
-            'patronage_bonus_level_10' => 'required|integer',
-            'patronage_bonus_level_11' => 'required|integer',
-            'patronage_bonus_level_12' => 'required|integer',
+
+            // Selling & Deductions (decimals)
+            'sell_zcoins_charge_percent' => 'required|numeric',
+            'deduction_for_zcare_php' => 'required|numeric',
+            'rebates_cashback_percent' => 'required|numeric',
+
+            // Duplication Bonus (decimals for 12 levels)
+            'duplication_bonus_level_1' => 'required|numeric',
+            'duplication_bonus_level_2' => 'required|numeric',
+            'duplication_bonus_level_3' => 'required|numeric',
+            'duplication_bonus_level_4' => 'required|numeric',
+            'duplication_bonus_level_5' => 'required|numeric',
+            'duplication_bonus_level_6' => 'required|numeric',
+            'duplication_bonus_level_7' => 'required|numeric',
+            'duplication_bonus_level_8' => 'required|numeric',
+            'duplication_bonus_level_9' => 'required|numeric',
+            'duplication_bonus_level_10' => 'required|numeric',
+            'duplication_bonus_level_11' => 'required|numeric',
+            'duplication_bonus_level_12' => 'required|numeric',
+
+            // Incentives (strings for 12 levels)
+            'incentives_percent_level_1' => 'required|string',
+            'incentives_percent_level_2' => 'required|string',
+            'incentives_percent_level_3' => 'required|string',
+            'incentives_percent_level_4' => 'required|string',
+            'incentives_percent_level_5' => 'required|string',
+            'incentives_percent_level_6' => 'required|string',
+            'incentives_percent_level_7' => 'required|string',
+            'incentives_percent_level_8' => 'required|string',
+            'incentives_percent_level_9' => 'required|string',
+            'incentives_percent_level_10' => 'required|string',
+            'incentives_percent_level_11' => 'required|string',
+            'incentives_percent_level_12' => 'required|string',
+
+            // Patronage Bonus (decimals for 12 levels)
+            'patronage_bonus_level_1' => 'required|numeric',
+            'patronage_bonus_level_2' => 'required|numeric',
+            'patronage_bonus_level_3' => 'required|numeric',
+            'patronage_bonus_level_4' => 'required|numeric',
+            'patronage_bonus_level_5' => 'required|numeric',
+            'patronage_bonus_level_6' => 'required|numeric',
+            'patronage_bonus_level_7' => 'required|numeric',
+            'patronage_bonus_level_8' => 'required|numeric',
+            'patronage_bonus_level_9' => 'required|numeric',
+            'patronage_bonus_level_10' => 'required|numeric',
+            'patronage_bonus_level_11' => 'required|numeric',
+            'patronage_bonus_level_12' => 'required|numeric',
         ]);
 
         // Get the settings record or create one if not exist.
