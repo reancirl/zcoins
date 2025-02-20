@@ -19,6 +19,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
+    Route::get('/qr', function () {
+        return Inertia::render('QrCode');
+    })->name('qr');
+
     Route::get('/downlines', [DownlineController::class, 'index'])->name('downlines');
     Route::get('/genealogy', [DownlineController::class, 'genealogy'])->name('genealogy');
 

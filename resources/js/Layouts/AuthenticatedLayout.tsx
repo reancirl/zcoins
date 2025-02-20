@@ -91,6 +91,13 @@ export default function Authenticated({
                                 >
                                     Genealogy
                                 </NavLink>
+
+                                <NavLink
+                                    href={route('qr')}
+                                    active={route().current('qr')}
+                                >
+                                    QR Code
+                                </NavLink>
                             </div>
                         </div>
 
