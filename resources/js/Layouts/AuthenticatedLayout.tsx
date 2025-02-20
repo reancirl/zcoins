@@ -45,6 +45,15 @@ export default function Authenticated({
                                     Dashboard
                                 </NavLink>
 
+                                {user && !user.is_admin && (
+                                    <NavLink
+                                        href={route('downlines')}
+                                        active={route().current('downlines')}
+                                    >
+                                        Downlines
+                                    </NavLink>
+                                )}
+
                                 {user && user.is_admin && (
                                     <NavLink
                                         href={route('activation-codes')}

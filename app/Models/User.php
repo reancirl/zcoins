@@ -117,4 +117,23 @@ class User extends Authenticatable
         }
         return $bonus;
     }
+
+    /**
+     * Recursively retrieve all downline users.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function getAllDownlines()
+    {
+        $downlines = collect();
+
+        foreach ($this->referrals as $referral) {
+            $downlines->push($referral);
+            // Merge downlines from this referral.
+            $downlines = $downlines->merge($referral->getAllDownlines());
+        }
+
+        return $downlines;
+    }
+
 }

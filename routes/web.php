@@ -8,6 +8,7 @@ use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\ActivationCodeHistoryController;
 use App\Http\Controllers\SystemSettingsController;
+use App\Http\Controllers\DownlineController;
 
 Route::get('/', function () {
     return redirect('/login');
@@ -18,17 +19,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
-    Route::middleware([AdminMiddleware::class])->group(function () {
-        // Show activation codes
+    Route::get('/downlines', [DownlineController::class, 'index'])->name('downlines');
+
+    Route::middleware(['auth', 'verified', AdminMiddleware::class])->group(function () {
         Route::get('/activation-codes', [ActivationCodeController::class, 'index'])
             ->name('activation-codes');
 
         // Generate new activation codes (POST request)
         Route::post('/activation-codes/generate', [ActivationCodeController::class, 'generate'])
             ->name('activation-codes.generate');
-    });
-
-    Route::middleware(['auth', 'verified', AdminMiddleware::class])->group(function () {
+            
         Route::get('/members', [MemberController::class, 'index'])->name('members');
 
         Route::get('/activation-codes/history', [ActivationCodeHistoryController::class, 'index'])

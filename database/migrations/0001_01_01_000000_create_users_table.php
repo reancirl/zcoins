@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('middle_name')->nullable();
             $table->string('mobile_number')->nullable();
             $table->string('code_used')->nullable();
-            $table->string('sponsor_id')->nullable();
+            $table->unsignedBigInteger('sponsor_id')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
 
