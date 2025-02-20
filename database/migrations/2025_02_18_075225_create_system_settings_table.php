@@ -18,7 +18,7 @@ return new class extends Migration {
                         ->comment('Membership fee in PHP');
 
                   // Referral Settings
-                  $table->decimal('direct_referral_bonus_zcoins', 10, 2)->default(1.6667)
+                  $table->decimal('direct_referral_bonus_php', 10, 2)->default(1000)
                         ->comment('Direct Referral Bonus in PHP'); // changed to PHP
                   $table->decimal('buy_zcoins_interest_percent', 10, 2)->default(20)
                         ->comment('Buy ZCoins Interest in Percentage');

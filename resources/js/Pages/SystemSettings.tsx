@@ -8,7 +8,7 @@ interface SystemSettingsProps {
         zcoins_value_to_php: number;
         default_currency: string;
         membership_fee_php: number;
-        direct_referral_bonus_zcoins: number;
+        direct_referral_bonus_php: number;
         buy_zcoins_interest_percent: number;
         buy_zcoins_daily_interest_for_late_payment_percent: number;
         deduction_for_processing_fee_php: number;
@@ -76,8 +76,7 @@ export default function SystemSettings({ settings }: SystemSettingsProps) {
         zcoins_value_to_php: settings.zcoins_value_to_php || 60,
         default_currency: settings.default_currency || 'PHP',
         membership_fee_php: settings.membership_fee_php || 500,
-        direct_referral_bonus_zcoins:
-            settings.direct_referral_bonus_zcoins || 0,
+        direct_referral_bonus_php: settings.direct_referral_bonus_php || 0,
         buy_zcoins_interest_percent: settings.buy_zcoins_interest_percent || 0,
         buy_zcoins_daily_interest_for_late_payment_percent:
             settings.buy_zcoins_daily_interest_for_late_payment_percent || 0,
@@ -158,8 +157,7 @@ export default function SystemSettings({ settings }: SystemSettingsProps) {
             zcoins_value_to_php: settings.zcoins_value_to_php || 60,
             default_currency: settings.default_currency || 'PHP',
             membership_fee_php: settings.membership_fee_php || 60,
-            direct_referral_bonus_zcoins:
-                settings.direct_referral_bonus_zcoins || 0,
+            direct_referral_bonus_php: settings.direct_referral_bonus_php || 0,
             buy_zcoins_interest_percent:
                 settings.buy_zcoins_interest_percent || 0,
             buy_zcoins_daily_interest_for_late_payment_percent:
@@ -366,29 +364,29 @@ export default function SystemSettings({ settings }: SystemSettingsProps) {
                                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                                     <div>
                                         <label
-                                            htmlFor="direct_referral_bonus_zcoins"
+                                            htmlFor="direct_referral_bonus_php"
                                             className="block text-sm font-medium text-gray-700"
                                         >
-                                            Direct Referral Bonus (ZCoins)
+                                            Direct Referral Bonus (PHP)
                                         </label>
                                         <input
-                                            id="direct_referral_bonus_zcoins"
+                                            id="direct_referral_bonus_php"
                                             type="number"
                                             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                                             value={
-                                                data.direct_referral_bonus_zcoins
+                                                data.direct_referral_bonus_php
                                             }
                                             onChange={(e) =>
                                                 setData(
-                                                    'direct_referral_bonus_zcoins',
+                                                    'direct_referral_bonus_php',
                                                     parseFloat(e.target.value),
                                                 )
                                             }
                                         />
-                                        {errors.direct_referral_bonus_zcoins && (
+                                        {errors.direct_referral_bonus_php && (
                                             <p className="mt-2 text-sm text-red-600">
                                                 {
-                                                    errors.direct_referral_bonus_zcoins
+                                                    errors.direct_referral_bonus_php
                                                 }
                                             </p>
                                         )}

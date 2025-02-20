@@ -21,7 +21,7 @@ class SystemSettingsSeeder extends Seeder
                 'membership_fee_php' => 500,
 
                 // Referral Settings
-                'direct_referral_bonus_zcoins' => 1.6667,
+                'direct_referral_bonus_php' => 100,
                 'buy_zcoins_interest_percent' => 20,
                 'buy_zcoins_daily_interest_for_late_payment_percent' => 0.5,
                 'deduction_for_processing_fee_php' => 50,

@@ -33,7 +33,7 @@ class SystemSettingsController extends Controller
             'membership_fee_php' => 'required|numeric',
 
             // Referral Settings (decimals)
-            'direct_referral_bonus_zcoins' => 'required|numeric',
+            'direct_referral_bonus_php' => 'required|numeric',
             'buy_zcoins_interest_percent' => 'required|numeric',
             'buy_zcoins_daily_interest_for_late_payment_percent' => 'required|numeric',
             'deduction_for_processing_fee_php' => 'required|numeric',
