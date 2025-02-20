@@ -57,6 +57,6 @@ class DatabaseSeeder extends Seeder
         $this->command->info('10 Activation codes created successfully.');
 
         $this->call(SystemSettingsSeeder::class);
-        // $this->call(UserReferralSeeder::class);
+        $this->call(UserReferralSeeder::class);
     }
 }

@@ -19,6 +19,7 @@ class UserReferralSeeder extends Seeder
                 'username' => 'rey',
                 'first_name' => 'Rey',
                 'last_name' => 'Head',
+                'sponsor_id' => 2,
                 'password' => bcrypt('password'),
             ]
         );
@@ -136,6 +137,42 @@ class UserReferralSeeder extends Seeder
                 'first_name' => 'Jackson',
                 'last_name' => 'Black',
                 'sponsor_id' => $mariel->id,
+                'password' => bcrypt('password'),
+            ]
+        );
+
+        // Create direct referrals of Rey
+        User::firstOrCreate(
+            ['email' => 'mac@example.com'],
+            [
+                'username' => 'mac',
+                'first_name' => 'Mac',
+                'last_name' => 'Doe',
+                'sponsor_id' => $rey->id,
+                'password' => bcrypt('password'),
+            ]
+        );
+
+        // Create direct referrals of Rey
+        User::firstOrCreate(
+            ['email' => 'jerico@example.com'],
+            [
+                'username' => 'jerico',
+                'first_name' => 'Jerico',
+                'last_name' => 'Doe',
+                'sponsor_id' => $rey->id,
+                'password' => bcrypt('password'),
+            ]
+        );
+
+        // Create direct referrals of Rey
+        User::firstOrCreate(
+            ['email' => 'russel@example.com'],
+            [
+                'username' => 'russel',
+                'first_name' => 'Russel',
+                'last_name' => 'Doe',
+                'sponsor_id' => $rey->id,
                 'password' => bcrypt('password'),
             ]
         );

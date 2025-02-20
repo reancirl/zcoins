@@ -13,7 +13,7 @@ class MemberController extends Controller
         // Retrieve all non-admin users, including their sponsor relationship.
         $members = User::where('is_admin', false)
             ->with('sponsor')
-            ->orderBy('created_at', 'desc')
+            ->orderBy('id', 'desc')
             ->get()
             ->map(function ($member) {
                 return [
