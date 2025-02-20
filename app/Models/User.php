@@ -29,6 +29,18 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    protected $appends = ['net_zcoins'];
+
+    /**
+     * Accessor to compute and return the user's net ZCoins.
+     *
+     * @return float
+     */
+    public function getNetZcoinsAttribute(): float
+    {
+        return $this->calculateNetZCoins();
+    }
+
     /**
      * Get the attributes that should be cast.
      *

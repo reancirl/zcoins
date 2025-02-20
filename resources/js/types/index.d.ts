@@ -1,6 +1,7 @@
 import { Config } from 'ziggy-js';
 
 export interface User {
+    net_zcoins: number;
     is_admin: boolean;
     id: number;
     username: string;

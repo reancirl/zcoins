@@ -37,6 +37,7 @@ class DatabaseSeeder extends Seeder
                 'username' => 'lumax', // Added username
                 'first_name' => 'Lumax',
                 'last_name' => 'User',
+                'sponsor_id' => 1,
                 'password' => Hash::make('password'),
             ]
         );

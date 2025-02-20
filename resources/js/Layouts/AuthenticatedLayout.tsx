@@ -33,7 +33,7 @@ export default function Authenticated({
                                     href="/"
                                     className="text-xl font-extrabold"
                                 >
-                                    ZCoins
+                                    ZPlanet
                                 </Link>
                             </div>
 
