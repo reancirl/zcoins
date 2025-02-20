@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
                 'username' => 'admin', // Added username
                 'first_name' => 'Admin',
                 'last_name' => 'User',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('password1'),
                 // You can also set additional fields if needed:
                 // 'mobile_number' => '1234567890',
                 // 'address'       => '123 Admin St.',

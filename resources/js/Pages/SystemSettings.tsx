@@ -836,7 +836,7 @@ export default function SystemSettings({ settings }: SystemSettingsProps) {
                         {activeTab === 'incentives' && (
                             <div className="mt-6">
                                 <h3 className="mb-2 text-lg font-medium">
-                                    Incentives (%) (12 Levels)
+                                    Incentives (GIFTS) (12 Levels)
                                 </h3>
                                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
                                     {[...Array(12)].map((_, i) => {
