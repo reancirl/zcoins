@@ -48,4 +48,14 @@ class DownlineController extends Controller
             'downlines' => $sortedGroups,
         ]);
     }
+
+    public function genealogy(): Response
+    {
+        $user = auth()->user();
+        // Build the genealogy tree for the current user.
+        $genealogy = $user->toGenealogyArray();
+        return Inertia::render('Genealogy', [
+            'genealogy' => $genealogy,
+        ]);
+    }
 }

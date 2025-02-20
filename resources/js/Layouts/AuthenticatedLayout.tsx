@@ -84,6 +84,13 @@ export default function Authenticated({
                                         History - Activation Codes
                                     </NavLink>
                                 )}
+
+                                <NavLink
+                                    href={route('genealogy')}
+                                    active={route().current('genealogy')}
+                                >
+                                    Genealogy
+                                </NavLink>
                             </div>
                         </div>
 

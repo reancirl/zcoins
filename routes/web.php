@@ -20,6 +20,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('dashboard');
 
     Route::get('/downlines', [DownlineController::class, 'index'])->name('downlines');
+    Route::get('/genealogy', [DownlineController::class, 'genealogy'])->name('genealogy');
 
     Route::middleware(['auth', 'verified', AdminMiddleware::class])->group(function () {
         Route::get('/activation-codes', [ActivationCodeController::class, 'index'])
@@ -28,7 +29,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         // Generate new activation codes (POST request)
         Route::post('/activation-codes/generate', [ActivationCodeController::class, 'generate'])
             ->name('activation-codes.generate');
-            
+
         Route::get('/members', [MemberController::class, 'index'])->name('members');
 
         Route::get('/activation-codes/history', [ActivationCodeHistoryController::class, 'index'])
