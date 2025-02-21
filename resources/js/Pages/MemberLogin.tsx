@@ -1,4 +1,3 @@
-import Checkbox from '@/Components/Checkbox';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
@@ -7,35 +6,38 @@ import GuestLayout from '@/Layouts/GuestLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { FormEventHandler, useState } from 'react';
 
-export default function Login({
-    status,
-    canResetPassword,
-}: {
+interface MemberLoginProps {
     status?: string;
     canResetPassword: boolean;
-}) {
+}
+
+export default function MemberLogin({
+    status,
+    canResetPassword,
+}: MemberLoginProps) {
     const { data, setData, post, processing, errors, reset } = useForm({
         login: '',
         password: '',
-        remember: false as boolean,
+        remember: false,
     });
 
     const [showPassword, setShowPassword] = useState(false);
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
-        post(route('login'), {
+        // Assuming your member login POST route is named 'member-login'
+        post(route('member-login'), {
             onFinish: () => reset('password'),
         });
     };
 
     return (
         <GuestLayout>
-            <Head title="Admin Log in" />
+            <Head title="Member Log in" />
 
             <div className="mx-auto mt-10 max-w-md">
                 <h2 className="mb-6 text-center text-2xl font-bold">
-                    Admin Login
+                    Member Login
                 </h2>
                 {status && (
                     <div className="mb-4 text-center text-sm font-medium text-green-600">
@@ -46,12 +48,9 @@ export default function Login({
                     onSubmit={submit}
                     className="mb-4 rounded bg-white px-8 pb-8 pt-6 shadow-md"
                 >
-                    {/* Admin Login Field */}
+                    {/* Login Field (Email or Username) */}
                     <div>
-                        <InputLabel
-                            htmlFor="login"
-                            value="Admin Email or Username"
-                        />
+                        <InputLabel htmlFor="login" value="Email or Username" />
                         <TextInput
                             id="login"
                             name="login"
@@ -65,7 +64,7 @@ export default function Login({
                         <InputError message={errors.login} className="mt-2" />
                     </div>
 
-                    {/* Password Field with Reveal Toggle */}
+                    {/* Password Field with Toggle */}
                     <div className="mt-4">
                         <InputLabel htmlFor="password" value="Password" />
                         <div className="relative">
@@ -138,22 +137,6 @@ export default function Login({
                         />
                     </div>
 
-                    {/* Remember Me */}
-                    <div className="mt-4 block">
-                        <label className="flex items-center">
-                            <Checkbox
-                                name="remember"
-                                checked={data.remember}
-                                onChange={(e) =>
-                                    setData('remember', e.target.checked)
-                                }
-                            />
-                            <span className="ml-2 text-sm text-gray-600">
-                                Remember me
-                            </span>
-                        </label>
-                    </div>
-
                     <div className="mt-6 flex items-center justify-between">
                         {canResetPassword && (
                             <Link
@@ -164,7 +147,7 @@ export default function Login({
                             </Link>
                         )}
                         <PrimaryButton className="ml-4" disabled={processing}>
-                            Sign in
+                            Log in
                         </PrimaryButton>
                     </div>
                 </form>

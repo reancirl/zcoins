@@ -45,7 +45,13 @@ class LoginRequest extends FormRequest
         // Determine whether the login is an email or username.
         $fieldType = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 
-        if (!Auth::attempt([$fieldType => $login, 'password' => $this->input('password')], $this->boolean('remember'))) {
+        if (
+            !Auth::attempt([
+                $fieldType => $login,
+                'password' => $this->input('password'),
+                'is_admin' => true,
+            ], $this->boolean('remember'))
+        ) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
