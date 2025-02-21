@@ -20,6 +20,17 @@ class User extends Authenticatable
     protected $guarded = [];
 
     /**
+     * Get the user's ID as a formatted string.
+     *
+     * @param  mixed  $value
+     * @return string
+     */
+    public function getIdAttribute($value)
+    {
+        return sprintf('%04d', $value);
+    }
+
+    /**
      * The attributes that should be hidden for serialization.
      *
      * @var list<string>
