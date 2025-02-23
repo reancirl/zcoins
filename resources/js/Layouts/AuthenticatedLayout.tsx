@@ -210,36 +210,90 @@ export default function Authenticated({
                         ' sm:hidden'
                     }
                 >
-                    <div className="space-y-1 pb-3 pt-2">
-                        <ResponsiveNavLink
-                            href={route('dashboard')}
-                            active={route().current('dashboard')}
-                        >
-                            Dashboard
-                        </ResponsiveNavLink>
-                    </div>
-
-                    <div className="border-t border-gray-200 pb-1 pt-4">
-                        <div className="px-4">
-                            <div className="text-base font-medium text-gray-800">
-                                {user.first_name}
-                            </div>
-                            <div className="text-sm font-medium text-gray-500">
-                                {user.email}
-                            </div>
-                        </div>
-
-                        <div className="mt-3 space-y-1">
-                            <ResponsiveNavLink href={route('profile.edit')}>
-                                Profile
+                    <div className="border-t border-gray-200 px-4 pb-3 pt-4">
+                        <div className="space-y-1">
+                            <ResponsiveNavLink
+                                href={route('dashboard')}
+                                active={route().current('dashboard')}
+                            >
+                                Dashboard
                             </ResponsiveNavLink>
                             <ResponsiveNavLink
-                                method="post"
-                                href={route('logout')}
-                                as="button"
+                                href={route('transactions')}
+                                active={route().current('transactions')}
                             >
-                                Log Out
+                                Transactions
                             </ResponsiveNavLink>
+                            {user && !user.is_admin && (
+                                <ResponsiveNavLink
+                                    href={route('downlines')}
+                                    active={route().current('downlines')}
+                                >
+                                    Downlines
+                                </ResponsiveNavLink>
+                            )}
+                            {user && user.is_admin && (
+                                <ResponsiveNavLink
+                                    href={route('activation-codes')}
+                                    active={route().current('activation-codes')}
+                                >
+                                    Activation Codes
+                                </ResponsiveNavLink>
+                            )}
+                            {user && user.is_admin && (
+                                <ResponsiveNavLink
+                                    href={route('members')}
+                                    active={route().current('members')}
+                                >
+                                    Members
+                                </ResponsiveNavLink>
+                            )}
+                            {user && user.is_admin && (
+                                <ResponsiveNavLink
+                                    href={route('activation-codes.history')}
+                                    active={route().current(
+                                        'activation-codes.history',
+                                    )}
+                                >
+                                    History - Activation Codes
+                                </ResponsiveNavLink>
+                            )}
+                            <ResponsiveNavLink
+                                href={route('genealogy')}
+                                active={route().current('genealogy')}
+                            >
+                                Genealogy
+                            </ResponsiveNavLink>
+                            <ResponsiveNavLink
+                                href={route('qr')}
+                                active={route().current('qr')}
+                            >
+                                QR Code
+                            </ResponsiveNavLink>
+                        </div>
+
+                        <div className="border-t border-gray-200 pb-1 pt-4">
+                            <div className="px-4">
+                                <div className="text-base font-medium text-gray-800">
+                                    {user.first_name}
+                                </div>
+                                <div className="text-sm font-medium text-gray-500">
+                                    {user.email}
+                                </div>
+                            </div>
+
+                            <div className="mt-3 space-y-1">
+                                <ResponsiveNavLink href={route('profile.edit')}>
+                                    Profile
+                                </ResponsiveNavLink>
+                                <ResponsiveNavLink
+                                    method="post"
+                                    href={route('logout')}
+                                    as="button"
+                                >
+                                    Log Out
+                                </ResponsiveNavLink>
+                            </div>
                         </div>
                     </div>
                 </div>
