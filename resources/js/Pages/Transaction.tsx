@@ -139,20 +139,28 @@ export default function Transactions({ transactions }: TransactionsProps) {
                                 >
                                     Filter
                                 </button>
-                                <button
-                                    type="button"
-                                    onClick={() => setShowBuyModal(true)}
-                                    className="inline-flex items-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-white shadow-sm hover:bg-green-700"
-                                >
-                                    Buy Zcoins
-                                </button>
-                                <button
-                                    type="button"
-                                    onClick={() => setShowSellModal(true)}
-                                    className="inline-flex items-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-white shadow-sm hover:bg-red-700"
-                                >
-                                    Sell Zcoins
-                                </button>
+                                {!authUser.is_admin && (
+                                    <>
+                                        <button
+                                            type="button"
+                                            onClick={() =>
+                                                setShowBuyModal(true)
+                                            }
+                                            className="inline-flex items-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-white shadow-sm hover:bg-green-700"
+                                        >
+                                            Buy Zcoins
+                                        </button>
+                                        <button
+                                            type="button"
+                                            onClick={() =>
+                                                setShowSellModal(true)
+                                            }
+                                            className="ml-2 inline-flex items-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-white shadow-sm hover:bg-red-700"
+                                        >
+                                            Sell Zcoins
+                                        </button>
+                                    </>
+                                )}
                             </div>
                         </div>
                     </form>
