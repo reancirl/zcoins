@@ -29,18 +29,6 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    protected $appends = ['net_zcoins'];
-
-    /**
-     * Accessor to compute and return the user's net ZCoins.
-     *
-     * @return float
-     */
-    public function getNetZcoinsAttribute(): float
-    {
-        return $this->calculateNetZCoins();
-    }
-
     /**
      * Get the attributes that should be cast.
      *
@@ -70,6 +58,12 @@ class User extends Authenticatable
         return $this->hasMany(self::class, 'sponsor_id');
     }
 
+    public function transactions()
+    {
+        return $this->hasMany(\App\Models\Transaction::class);
+    }
+
+
     /**
      * Calculate the total (net) ZCoins for this user.
      *
@@ -78,18 +72,54 @@ class User extends Authenticatable
      *
      * @return float Total ZCoins for the user.
      */
+
+    protected $appends = ['net_zcoins'];
+
+    /**
+     * Accessor to compute and return the user's net ZCoins.
+     *
+     * @return float
+     */
+    public function getNetZcoinsAttribute(): float
+    {
+        return $this->calculateNetZCoins();
+    }
+
+    /**
+     * Calculate the total (net) ZCoins for this user.
+     *
+     * Total ZCoins = (Membership fee converted to ZCoins)
+     *               + (Total referral bonus from levels 1 to 12)
+     *               + (Sum of amounts from transactions with type buy, incentive, or rebates and status success)
+     *               - (Sum of amounts from sell transactions with status success and paid true)
+     *
+     * @return float
+     */
     public function calculateNetZCoins(): float
     {
         $settings = \App\Models\SystemSetting::getSettings();
-        $conversionRate = $settings->zcoins_value_to_php; // e.g. 60 PHP per ZCoin
+        $conversionRate = $settings->zcoins_value_to_php; // PHP per ZCoin
 
         // Base ZCoins from membership fee
         $baseZCoins = $settings->membership_fee_php / $conversionRate;
 
-        // Compute total bonus from referrals from level 1 through level 12.
+        // Compute total bonus from referrals (levels 1 through 12)
         $bonus = $this->computeReferralBonus(1, 12, $settings, $conversionRate);
 
-        return $baseZCoins + $bonus;
+        // Compute total credits: transactions of type buy, incentive, rebates with status 'success'
+        $credit = $this->transactions()
+            ->whereIn('type', ['buy', 'incentive', 'rebates'])
+            ->where('status', 'success')
+            ->sum('amount_in_zcoins');
+
+        // Compute total debits: transactions of type sell with status 'success' and paid true
+        $debit = $this->transactions()
+            ->where('type', 'sell')
+            ->where('status', 'success')
+            ->where('paid', true)
+            ->sum('amount_in_zcoins');
+
+        return $baseZCoins + $bonus + $credit - $debit;
     }
 
     /**
@@ -110,9 +140,9 @@ class User extends Authenticatable
         $bonus = 0;
         $field = 'duplication_bonus_level_' . $currentLevel;
         foreach ($this->referrals as $referral) {
-            // Add bonus for this referral at the current level.
+            // Add bonus for this referral at the current level, converting PHP to ZCoins.
             $bonus += $settings->$field / $conversionRate;
-            // Recursively add bonus from this referral's downline (next level).
+            // Recursively add bonus from the referral's own downline at the next level.
             $bonus += $referral->computeReferralBonus($currentLevel + 1, $maxLevel, $settings, $conversionRate);
         }
         return $bonus;
