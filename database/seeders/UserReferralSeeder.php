@@ -20,6 +20,7 @@ class UserReferralSeeder extends Seeder
                 'first_name' => 'Rey',
                 'last_name' => 'Head',
                 'sponsor_id' => 2,
+                'member_id' => '0002',
                 'password' => bcrypt('password'),
             ]
         );
@@ -31,6 +32,7 @@ class UserReferralSeeder extends Seeder
                 'username' => 'chermae',
                 'first_name' => 'Chermae',
                 'last_name' => 'Doe',
+                'member_id' => '0003',
                 'sponsor_id' => $rey->id,
                 'password' => bcrypt('password'),
             ]
@@ -42,6 +44,7 @@ class UserReferralSeeder extends Seeder
                 'username' => 'jason',
                 'first_name' => 'Jason',
                 'last_name' => 'Smith',
+                'member_id' => '0004',
                 'sponsor_id' => $rey->id,
                 'password' => bcrypt('password'),
             ]
@@ -54,6 +57,7 @@ class UserReferralSeeder extends Seeder
                 'username' => 'max',
                 'first_name' => 'Max',
                 'last_name' => 'Johnson',
+                'member_id' => '0005',
                 'sponsor_id' => $jason->id,
                 'password' => bcrypt('password'),
             ]
@@ -65,6 +69,7 @@ class UserReferralSeeder extends Seeder
                 'username' => 'carlo',
                 'first_name' => 'Carlo',
                 'last_name' => 'Garcia',
+                'member_id' => '0006',
                 'sponsor_id' => $jason->id,
                 'password' => bcrypt('password'),
             ]
@@ -77,6 +82,7 @@ class UserReferralSeeder extends Seeder
                 'username' => 'mariel',
                 'first_name' => 'Mariel',
                 'last_name' => 'Lopez',
+                'member_id' => '0007',
                 'sponsor_id' => $chermae->id,
                 'password' => bcrypt('password'),
             ]
@@ -88,6 +94,7 @@ class UserReferralSeeder extends Seeder
                 'username' => 'tharra',
                 'first_name' => 'Tharra',
                 'last_name' => 'Rodriguez',
+                'member_id' => '0008',
                 'sponsor_id' => $chermae->id,
                 'password' => bcrypt('password'),
             ]
@@ -102,6 +109,7 @@ class UserReferralSeeder extends Seeder
                 'username' => 'liam',
                 'first_name' => 'Liam',
                 'last_name' => 'Brown',
+                'member_id' => '0009',
                 'sponsor_id' => $max->id,
                 'password' => bcrypt('password'),
             ]
@@ -113,6 +121,7 @@ class UserReferralSeeder extends Seeder
                 'username' => 'olivia',
                 'first_name' => 'Olivia',
                 'last_name' => 'Green',
+                'member_id' => '0010',
                 'sponsor_id' => $max->id,
                 'password' => bcrypt('password'),
             ]
@@ -125,6 +134,7 @@ class UserReferralSeeder extends Seeder
                 'username' => 'sophia',
                 'first_name' => 'Sophia',
                 'last_name' => 'White',
+                'member_id' => '0011',
                 'sponsor_id' => $mariel->id,
                 'password' => bcrypt('password'),
             ]
@@ -136,6 +146,7 @@ class UserReferralSeeder extends Seeder
                 'username' => 'jackson',
                 'first_name' => 'Jackson',
                 'last_name' => 'Black',
+                'member_id' => '0012',
                 'sponsor_id' => $mariel->id,
                 'password' => bcrypt('password'),
             ]
@@ -148,6 +159,7 @@ class UserReferralSeeder extends Seeder
                 'username' => 'mac',
                 'first_name' => 'Mac',
                 'last_name' => 'Doe',
+                'member_id' => '0013',
                 'sponsor_id' => $rey->id,
                 'password' => bcrypt('password'),
             ]
@@ -160,6 +172,7 @@ class UserReferralSeeder extends Seeder
                 'username' => 'jerico',
                 'first_name' => 'Jerico',
                 'last_name' => 'Doe',
+                'member_id' => '0014',
                 'sponsor_id' => $rey->id,
                 'password' => bcrypt('password'),
             ]
@@ -172,6 +185,7 @@ class UserReferralSeeder extends Seeder
                 'username' => 'russel',
                 'first_name' => 'Russel',
                 'last_name' => 'Doe',
+                'member_id' => '0015',
                 'sponsor_id' => $rey->id,
                 'password' => bcrypt('password'),
             ]

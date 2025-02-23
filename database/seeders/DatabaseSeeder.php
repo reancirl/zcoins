@@ -15,6 +15,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // Create the admin user if it doesn't exist.
+        $admin = User::firstOrCreate(
+            ['email' => 'admin@admin.com'],
+            [
+                'is_admin' => true,
+                'username' => 'admin',
+                'member_id' => '0000',
+                'first_name' => 'Admin',
+                'last_name' => 'User',
+                'password' => Hash::make('password1'),
+            ]
+        );
 
         User::firstOrCreate(
             ['email' => 'luyaomacartin@gmail.com'],
@@ -24,19 +36,8 @@ class DatabaseSeeder extends Seeder
                 'first_name' => 'Lumax',
                 'last_name' => 'User',
                 'sponsor_id' => 1,
+                'member_id' => '0001',
                 'password' => Hash::make('password'),
-            ]
-        );
-
-        // Create the admin user if it doesn't exist.
-        $admin = User::firstOrCreate(
-            ['email' => 'admin@admin.com'],
-            [
-                'is_admin' => true,
-                'username' => 'admin', // Added username
-                'first_name' => 'Admin',
-                'last_name' => 'User',
-                'password' => Hash::make('password1'),
             ]
         );
 

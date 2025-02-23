@@ -10,6 +10,7 @@ use App\Http\Controllers\ActivationCodeHistoryController;
 use App\Http\Controllers\SystemSettingsController;
 use App\Http\Controllers\DownlineController;
 use App\Http\Controllers\MemberLoginController;
+use App\Http\Controllers\TransactionController;
 
 Route::get('/', function () {
     return redirect('/member-login');
@@ -29,6 +30,20 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/downlines', [DownlineController::class, 'index'])->name('downlines');
     Route::get('/genealogy', [DownlineController::class, 'genealogy'])->name('genealogy');
+
+    Route::get('/transactions', [TransactionController::class, 'index'])
+        ->name('transactions');
+
+    Route::post('/transactions/buy', [TransactionController::class, 'buyZcoins'])
+        ->name('transactions.buyZcoins');
+
+    Route::post('/transactions/sell', [TransactionController::class, 'sellZcoins'])
+        ->name('transactions.sellZcoins');
+
+    Route::get('/transactions/{transaction}/edit', [TransactionController::class, 'edit'])->name('transactions.edit');
+
+    Route::put('/transactions/{transaction}', [TransactionController::class, 'update'])
+        ->name('transactions.update');
 
     Route::middleware(['auth', 'verified', AdminMiddleware::class])->group(function () {
         Route::get('/activation-codes', [ActivationCodeController::class, 'index'])

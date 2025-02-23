@@ -9,7 +9,7 @@ export default function QrCodePage() {
 
     // Use the current browser origin
     const appUrl = typeof window !== 'undefined' ? window.location.origin : '';
-    const registerUrl = `${appUrl}/register?sponsor_id=${user.id}`;
+    const registerUrl = `${appUrl}/register?sponsor_id=${user.member_id}`;
 
     // Create a ref to the QR code canvas
     const canvasRef = useRef<HTMLCanvasElement>(null);

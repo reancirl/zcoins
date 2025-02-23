@@ -5,6 +5,7 @@ export interface User {
     is_admin: boolean;
     id: number;
     username: string;
+    member_id: string;
     first_name: string;
     last_name: string;
     middle_name?: string;

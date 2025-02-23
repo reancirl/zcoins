@@ -17,7 +17,7 @@ class MemberController extends Controller
             ->get()
             ->map(function ($member) {
                 return [
-                    'id' => $member->id,
+                    'member_id' => $member->member_id,
                     'first_name' => $member->first_name,
                     'last_name' => $member->last_name,
                     'email' => $member->email,

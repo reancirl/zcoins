@@ -2,7 +2,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 
 interface Member {
-    id: number;
+    member_id: number;
     first_name: string;
     last_name: string;
     email: string;
@@ -51,9 +51,9 @@ export default function Members({ members }: MembersProps) {
                                 </thead>
                                 <tbody className="divide-y divide-gray-200 bg-white">
                                     {members.map((member) => (
-                                        <tr key={member.id}>
+                                        <tr key={member.member_id}>
                                             <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
-                                                {member.id}
+                                                {member.member_id}
                                             </td>
                                             <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-900">
                                                 {member.first_name}{' '}

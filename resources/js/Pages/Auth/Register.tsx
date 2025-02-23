@@ -56,7 +56,6 @@ export default function Register() {
                     <TextInput
                         id="sponsor_id"
                         name="sponsor_id"
-                        type="number"
                         value={data.sponsor_id}
                         readOnly={!!sponsorIdFromQuery} // Readonly if sponsor_id is provided via query param
                         className="mt-1 block w-full"

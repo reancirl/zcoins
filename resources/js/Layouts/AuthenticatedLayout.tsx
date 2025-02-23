@@ -45,6 +45,13 @@ export default function Authenticated({
                                     Dashboard
                                 </NavLink>
 
+                                <NavLink
+                                    href={route('transactions')}
+                                    active={route().current('transactions')}
+                                >
+                                    Transactions
+                                </NavLink>
+
                                 {user && !user.is_admin && (
                                     <NavLink
                                         href={route('downlines')}

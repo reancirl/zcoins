@@ -52,13 +52,13 @@ class RegisteredUserController extends Controller
             'bank_name' => 'nullable|string|max:255',
             'account_name' => 'nullable|string|max:255',
             'account_number' => 'nullable|string|max:255',
-            'sponsor_id' => 'nullable|integer|exists:users,id',
+            'sponsor_id' => 'nullable|string|exists:users,member_id',
         ]);
 
         // Verify that both the activation code and security code match a record.
         $activationCode = ActivationCode::where('code', $request->activation_code)
             ->where('security_code', $request->security_code)
-            ->where('active',1)
+            ->where('active', 1)
             ->first();
 
         if (!$activationCode) {
@@ -67,6 +67,15 @@ class RegisteredUserController extends Controller
                     'activation_code' => 'Invalid activation code or security code provided.',
                 ])
                 ->withInput();
+        }
+
+        // Lookup the sponsor if provided, using the sponsor's member_id.
+        $sponsorId = null;
+        if ($request->sponsor_id) {
+            $sponsorUser = User::where('member_id', $request->sponsor_id)->first();
+            if ($sponsorUser) {
+                $sponsorId = $sponsorUser->id;
+            }
         }
 
         // Create the user, including sponsor_id if provided.
@@ -87,8 +96,12 @@ class RegisteredUserController extends Controller
             'bank_name' => $request->bank_name,
             'account_name' => $request->account_name,
             'account_number' => $request->account_number,
-            'sponsor_id' => $request->sponsor_id,
+            'sponsor_id' => $sponsorId,
         ]);
+
+        // Generate the member_id by subtracting 1 from the user's id, then padding with zeros to 4 digits.
+        $user->member_id = sprintf('%04d', $user->id - 1);
+        $user->save();
 
         // Mark the activation code as used.
         $activationCode->active = 0;
