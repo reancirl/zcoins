@@ -10,18 +10,26 @@ class MemberController extends Controller
 {
     public function index(Request $request)
     {
-        // Retrieve all non-admin users, including their sponsor relationship.
-        $members = User::where('is_admin', false)
-            ->with('sponsor')
+        $search = $request->input('search');
+        $query = User::where('is_admin', false);
+
+        if ($search) {
+            $query->where(function ($q) use ($search) {
+                $q->where('first_name', 'like', "%{$search}%")
+                    ->orWhere('last_name', 'like', "%{$search}%");
+            });
+        }
+
+        $members = $query->with('sponsor')
             ->orderBy('id', 'desc')
-            ->get()
-            ->map(function ($member) {
+            ->paginate(15)
+            ->appends($request->only('search'))
+            ->through(function ($member) {
                 return [
                     'member_id' => $member->member_id,
                     'first_name' => $member->first_name,
                     'last_name' => $member->last_name,
                     'email' => $member->email,
-                    // If a sponsor exists, return their full name; otherwise, null.
                     'sponsor' => $member->sponsor
                         ? $member->sponsor->first_name . ' ' . $member->sponsor->last_name
                         : null,
@@ -30,6 +38,7 @@ class MemberController extends Controller
 
         return Inertia::render('Members', [
             'members' => $members,
+            'filters' => $request->only('search'),
         ]);
     }
 }

@@ -9,15 +9,11 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\ActivationCodeHistoryController;
 use App\Http\Controllers\SystemSettingsController;
 use App\Http\Controllers\DownlineController;
-use App\Http\Controllers\MemberLoginController;
 use App\Http\Controllers\TransactionController;
 
 Route::get('/', function () {
     return redirect('/member-login');
 });
-
-Route::get('/member-login', [MemberLoginController::class, 'index'])->name('member-login');
-Route::post('/member-login', [MemberLoginController::class, 'login']);
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
