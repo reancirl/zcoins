@@ -80,7 +80,7 @@ export default function ActivationCodes({
                                             </td>
                                             <td className="whitespace-nowrap px-6 py-4">
                                                 {code.active
-                                                    ? 'Unused'
+                                                    ? 'Active'
                                                     : 'Used'}
                                             </td>
                                         </tr>
