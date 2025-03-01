@@ -157,7 +157,7 @@ export default function Transactions({ transactions }: TransactionsProps) {
                                             }
                                             className="ml-2 inline-flex items-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-white shadow-sm hover:bg-red-700"
                                         >
-                                            Sell Zcoins
+                                            Cash Out
                                         </button>
                                     </>
                                 )}
@@ -216,11 +216,15 @@ export default function Transactions({ transactions }: TransactionsProps) {
                                                 }
                                             </td>
                                             <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-900">
-                                                {transaction.type
-                                                    .charAt(0)
-                                                    .toUpperCase() +
-                                                    transaction.type.slice(1)}
+                                                {transaction.type.toLowerCase() ===
+                                                'sell'
+                                                    ? 'Cash Out'
+                                                    : transaction.type
+                                                          .charAt(0)
+                                                          .toUpperCase() +
+                                                      transaction.type.slice(1)}
                                             </td>
+
                                             <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-900">
                                                 {transaction.requested_at}
                                             </td>
@@ -344,9 +348,7 @@ export default function Transactions({ transactions }: TransactionsProps) {
             {showSellModal && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50">
                     <div className="w-full max-w-md rounded bg-white p-6">
-                        <h3 className="mb-4 text-lg font-semibold">
-                            Sell Zcoins
-                        </h3>
+                        <h3 className="mb-4 text-lg font-semibold">Cash Out</h3>
                         <form
                             onSubmit={(e) => {
                                 e.preventDefault();
