@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -34,10 +33,16 @@ return new class extends Migration
             $table->string('zipcode')->nullable();
             $table->string('country')->default('PH');
 
-            //Disbursement
+            // Disbursement
             $table->string('bank_name')->nullable();
             $table->string('account_name')->nullable();
             $table->string('account_number')->nullable();
+
+            // Archiving Columns
+            $table->boolean('is_archived')->default(false);
+            $table->text('archived_reason')->nullable();
+            $table->timestamp('archived_at')->nullable();
+
             $table->rememberToken();
             $table->timestamps();
         });

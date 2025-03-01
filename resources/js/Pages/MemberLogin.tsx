@@ -186,7 +186,7 @@ export default function MemberLogin({
                 {/* RIGHT COLUMN (Image/Branding) */}
                 <div className="relative hidden h-auto w-full md:block md:w-1/2">
                     <img
-                        src="/img/japanwave.webp"
+                        src="/img/z_login_img.jpg"
                         alt="Login Banner"
                         className="h-full w-full object-cover"
                     />

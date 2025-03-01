@@ -22,7 +22,7 @@ class MemberController extends Controller
 
         $members = $query->with('sponsor')
             ->orderBy('id', 'desc')
-            ->paginate(15)
+            ->paginate(10)
             ->appends($request->only('search'))
             ->through(function ($member) {
                 return [
@@ -41,4 +41,22 @@ class MemberController extends Controller
             'filters' => $request->only('search'),
         ]);
     }
+    
+    public function archive(Request $request, $memberId)
+    {
+        $request->validate([
+            'reason' => 'required|string|max:255',
+        ]);
+
+        $member = User::findOrFail($memberId);
+        // Example: Set an "archived" flag and save the reason.
+        $member->update([
+            'is_archived' => true,
+            'archived_reason' => $request->input('reason'),
+            'archived_at' => now(),
+        ]);
+
+        return redirect()->back()->with('success', 'Member archived successfully.');
+    }
+
 }

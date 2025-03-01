@@ -50,6 +50,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             ->name('activation-codes.generate');
 
         Route::get('/members', [MemberController::class, 'index'])->name('members');
+        Route::post('/members/{member}/archive', [MemberController::class, 'archive'])->name('members.archive');
 
         Route::get('/activation-codes/history', [ActivationCodeHistoryController::class, 'index'])
             ->name('activation-codes.history');
