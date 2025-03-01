@@ -92,12 +92,14 @@ export default function Authenticated({
                                     </NavLink>
                                 )}
 
-                                <NavLink
-                                    href={route('genealogy')}
-                                    active={route().current('genealogy')}
-                                >
-                                    Genealogy
-                                </NavLink>
+                                {user && !user.is_admin && (
+                                    <NavLink
+                                        href={route('genealogy')}
+                                        active={route().current('genealogy')}
+                                    >
+                                        Genealogy
+                                    </NavLink>
+                                )}
 
                                 <NavLink
                                     href={route('qr')}
@@ -258,12 +260,14 @@ export default function Authenticated({
                                     History - Activation Codes
                                 </ResponsiveNavLink>
                             )}
-                            <ResponsiveNavLink
-                                href={route('genealogy')}
-                                active={route().current('genealogy')}
-                            >
-                                Genealogy
-                            </ResponsiveNavLink>
+                            {user && !user.is_admin && (
+                                <ResponsiveNavLink
+                                    href={route('genealogy')}
+                                    active={route().current('genealogy')}
+                                >
+                                    Genealogy
+                                </ResponsiveNavLink>
+                            )}
                             <ResponsiveNavLink
                                 href={route('qr')}
                                 active={route().current('qr')}
