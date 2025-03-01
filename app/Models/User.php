@@ -166,6 +166,7 @@ class User extends Authenticatable
         return $downlines;
     }
 
+    // In your User model
     public function toGenealogyArray()
     {
         return [
@@ -173,7 +174,9 @@ class User extends Authenticatable
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
             'email' => $this->email,
-            'referrals' => $this->referrals->map(fn($referral) => $referral->toGenealogyArray())->toArray()
+            'referrals' => $this->referrals
+                ->map(fn($referral) => $referral->toGenealogyArray())
+                ->toArray()
         ];
     }
 }
